@@ -2,21 +2,47 @@
 <html>
 
 <head>
-    <title>Trougao Sjerpinskog</title>
+    <title>Sierpinski Triangle</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    #canvas {
-        background-color: aqua;
-    }
-</style>
 
 <body>
-    <canvas id="canvas" width="1000" height="1000">
-
-
+    <canvas id="canvas" class="canvas" width="500" height="500">
     </canvas>
 
+    <div class="triangles">
+        <div class="first-half-triangle">
+            <div class="triangle-down"></div>
+        </div>
+        <div class="second-half-triangles">
+            <div id="triangle-up-1" class="triangle-up"></div>
+            <div id="triangle-up-2" class="triangle-up"></div>
+        </div>
+    </div>
+    <div class="main">
+        <h1>SIERPINSKI TRI<span>Δ</span>NGLE</h1>
+        <h2>Number of stages</h2>
+        <div id="value" class="value">0</div>
+        <input id="slider" type="range" min="0" max="10" step="1" value="0">
+        <button onclick="drawSierpinskiPeriodically(document.querySelector('.value').innerHTML-1, 100)">Draw It!</button>
+        <button id="close" class="close" onclick="drawSierpinskiPeriodically(-1, 100)">Close</button>
+    </div>
     <script>
+        var elem = document.querySelector('input[type="range"]');
+
+        var rangeValue = function(){
+            var newValue = elem.value;
+            var target = document.querySelector('.value');
+            target.innerHTML = newValue;
+        }
+
+        elem.addEventListener("input", rangeValue);
+
+
+
+
+
+
         const context = document.getElementById("canvas").getContext("2d");
 
         const drawTriangle = (position, length, color) => {
@@ -35,6 +61,7 @@
 
 
         const serpinskiTriangle = (position, length, level) => {
+            
             //stranica unutrasnjih trouglova je duplo kraca od stranice trougla u kojem se nalaze
             const innerLength = length / 2; 
             const innerPositions = [
@@ -62,17 +89,29 @@
         };
 
         const drawSierpinskiPeriodically = (levels, updateMS) => {
-            let i = 0;
-            serpinskiTriangle([0, canvas.width], canvas.height, i);
-            const interval = setInterval(() => {
-                context.clearRect(0, 0, canvas.width, canvas.height);
+            if(levels === -1) {
+                console.log("NULA JE")
+                document.getElementById("canvas").classList.remove("active");
+                document.getElementById("close").classList.remove("active");
+                document.getElementById("value").innerHTML = 0;
+                document.getElementById("slider").value = 0;
+            }
+            else {
+                document.getElementById("canvas").classList.add("active");
+                document.getElementById("close").classList.add("active");
+                let i = 0;
                 serpinskiTriangle([0, canvas.width], canvas.height, i);
-                if (i >= levels) clearInterval(interval)
-                i++;
-            }, updateMS)
+                const interval = setInterval(() => {
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                    serpinskiTriangle([0, canvas.width], canvas.height, i);
+                    if (i >= levels) clearInterval(interval)
+                    i++;
+                }, updateMS)
+            }
         }
 
-        drawSierpinskiPeriodically(4,1000)
+        // drawSierpinskiPeriodically(4,100)
+
 
     </script>
 </body>
