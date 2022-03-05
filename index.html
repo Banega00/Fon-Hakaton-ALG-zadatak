@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <canvas id="canvas" class="canvas active" width="500" height="500">
+    <canvas onmouseenter="canvasHover = true; drawSierpinskiPeriodically(document.querySelector('.value').innerHTML-1, 250, triangleColor);" onmouseleave="canvasHover = false" id="canvas" class="canvas active" width="500" height="500">
     </canvas>
 
     <div class="triangles">
@@ -22,6 +22,7 @@
     </div>
     <div id="main" class="main">
         <h1>SIERPINSKI TRI<span>Δ</span>NGLE</h1>
+        <p>Hover over image to play animation</p>
         <h2>Number of stages</h2>
         <div id="value" class="value">3</div>
         <input id="slider" type="range" min="0" max="10" step="1" value="3">
@@ -168,6 +169,14 @@
 
 
 
+        
+
+
+
+
+        //---------------------------------- KOD ZA ALGORITAM POCINJE OVDE ----------------------------------
+
+        var canvasHover = false;
 
         //SIERPINSKI TRIANGLE LOGIC
         const context = document.getElementById("canvas").getContext("2d");
@@ -209,7 +218,6 @@
                 document.getElementById("main").classList.add("shrink");
                 document.getElementById("value").innerHTML = 0;
                 document.getElementById("slider").value = 0;
-                console.log("ZATVORI")
                 window.scrollTo(0, 0);
             }
             else {
@@ -221,9 +229,13 @@
                 interval = setInterval(() => {
                     context.clearRect(0, 0, canvas.width, canvas.height);
                     serpinskiTriangle([0, canvas.width], canvas.height, i, color);
-                    // if (i >= levels) clearInterval(interval)
-                    if (i >= levels){
-                        i=-1;
+                    if (canvasHover === false) {
+                        if (i >= levels) clearInterval(interval)
+                    }
+                    else {
+                        if (i >= levels){
+                            i=-1;
+                        }
                     }
                     i++;
                 }, updateMS)
@@ -231,6 +243,8 @@
         }
 
         drawSierpinskiPeriodically(3, 250, triangleColor)
+        
+        //---------------------------------- KOD ZA ALGORITAM SE ZAVRSAVA OVDE ----------------------------------
 
     </script>
 </body>
