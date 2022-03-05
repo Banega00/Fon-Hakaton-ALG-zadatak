@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Trougao Sjerpinskog</title>
+</head>
+<style>
+    #canvas {
+        background-color: aqua;
+    }
+</style>
+
+<body>
+    <canvas id="canvas" width="1000" height="1000">
+
+
+    </canvas>
+
+    <script>
+        const context = document.getElementById("canvas").getContext("2d");
+
+        const drawTriangle = (position, length, color) => {
+            context.beginPath();
+            // context.moveTo(...position); 
+            context.lineTo(
+                position[0] + length / 2,
+                position[1] - length * Math.sin(Math.PI / 3)
+            );
+            context.lineTo(position[0] + length, position[1]);
+            context.lineTo(...position);
+            context.closePath();
+            context.fillStyle = color ?? 'black'
+            context.fill();
+        };
+
+
+        const serpinskiTriangle = (position, length, level) => {
+            //stranica unutrasnjih trouglova je duplo kraca od stranice trougla u kojem se nalaze
+            const innerLength = length / 2; 
+            const innerPositions = [
+                position,
+                [position[0] + innerLength, position[1]],
+                [
+                    position[0] + innerLength / 2,
+                    position[1] - Math.sin(Math.PI / 3) * innerLength,
+                ],
+            ];
+
+            //ako je dosao do nutlog nivoa iscrtaj trougao
+            //u suprotnom pozovi ovu funkciju sa jednim nivoom manje
+            const callback = level == 0 ? 
+            (trianglePosition) => drawTriangle(trianglePosition, innerLength) : 
+            (trianglePosition) => {
+                    serpinskiTriangle(
+                        trianglePosition,
+                        innerLength,
+                        level - 1
+                    );
+                }
+
+            innerPositions.forEach(callback)
+        };
+
+        const drawSierpinskiPeriodically = (levels, updateMS) => {
+            let i = 0;
+            serpinskiTriangle([0, canvas.width], canvas.height, i);
+            const interval = setInterval(() => {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                serpinskiTriangle([0, canvas.width], canvas.height, i);
+                if (i >= levels) clearInterval(interval)
+                i++;
+            }, updateMS)
+        }
+
+        drawSierpinskiPeriodically(4,1000)
+
+    </script>
+</body>
+
+</html>
