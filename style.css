@@ -1,15 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka&family=Kanit:wght@300;400;500;600;700&family=Montserrat:wght@400;500;700;800;900&family=Oswald:wght@400;500;700&family=Oxygen:wght@400;700&family=Public+Sans:wght@400;500;600;700&family=Roboto+Condensed:wght@400;700&family=Sarabun:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 html, body {
     height: 100%;
-    overflow: hidden;
+    overflow-y: hidden;
 }
 
 body {
+
+    
+
     margin: 0;
     background: rgb(233, 233, 233);
     background: linear-gradient(rgba(233, 233, 233,1) 0%, rgba(255,255,255,1) 25%);
     font-family: 'Fredoka';
+    /* font-family: 'Poppins'; */
     /* background: rgb(76,161,175); */
     /* background: linear-gradient(90deg, rgba(76,161,175,1) 0%, rgba(154,202,210,1) 81%, rgba(196,224,229,1) 100%);  */
 }
@@ -23,7 +28,7 @@ body {
 }
 #color-label {
     /* position: absolute; */
-    margin: 15px 15px 0 15px;
+    margin: 20px 15px 0px 15px;
     border-radius: 5px;
     height: 30px;
     width: 50px;
@@ -32,11 +37,12 @@ body {
     visibility: visible;
     height: 150px;
     opacity: 1;
-    top: 330px;
+    /* top: 330px; */
 }
 #color-picker {
-    position: absolute;
-    top: 300px;
+    position: relative;
+    z-index: 200;
+    /* top: 300px; */
 
     height: 0px;
     width: 185px;
@@ -46,7 +52,7 @@ body {
 
     transition: all 0.3s ease;
 }
-canvas:hover {
+#color-picker:hover {
     cursor: crosshair;
 }
 
@@ -111,7 +117,7 @@ canvas:hover {
 }
 
 .main h1 span {
-    color: #4ca1af;
+    color: #75a9b1;
 }
 
 
@@ -162,6 +168,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 button {
     padding: 10px;
     margin: 20px;
+    margin-top: 10px;
     border: none;
     background-color: #bdc3c7;
     font-size: 1.5em;
@@ -229,4 +236,31 @@ button:hover {
     position: absolute;
     top: 0;
     left: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    #canvas {
+        left: 50%;
+        transform: translate(-50%, 0%);
+        width: 50%;
+        padding: 0 40px 40px 40px;
+        position: absolute;
+    }
+    .main {
+        position: relative;
+        left: 0;
+        margin-top: 260px;
+        transition: all 0.3s ease;
+    }
+    .main.shrink {
+        margin-top: 0;
+    }
+    .main.shrink h1 span {
+        color: rgb(58, 58, 58);
+    }
 }
