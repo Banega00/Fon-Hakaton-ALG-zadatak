@@ -17,9 +17,10 @@
     </canvas>
 
     <script>
+        let color;
         const context = document.getElementById("canvas").getContext("2d");
 
-        const drawTriangle = (position, length, color) => {
+        const drawTriangle = (position, length) => {
             context.beginPath();
             // context.moveTo(...position); 
             context.lineTo(
