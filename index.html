@@ -34,8 +34,8 @@
         <canvas id="color-strip" height="150" width="30"></canvas>
         </div>
 
-        <button onclick="drawSierpinskiPeriodically(document.querySelector('.value').innerHTML-1, 250, triangleColor)">Draw It!</button>
-        <button id="close" class="close" onclick="drawSierpinskiPeriodically(-1, 250)">Close</button>
+        <button onclick="drawSierpinskiPeriodically(document.querySelector('.value').innerHTML-1, 250, triangleColor); console.log(document.querySelector('.value').innerHTML-1)">Draw It!</button>
+        <button id="close" class="close" onclick="drawSierpinskiPeriodically(-2, 250)">Close</button>
 
 
         
@@ -207,8 +207,9 @@
         };
         let interval;
         const drawSierpinskiPeriodically = (levels, updateMS, color) => {
+            console.log(levels + " - levels");
             if(interval)clearInterval(interval)
-            if(levels === -1) {
+            if(levels === -2) {
                 document.getElementById("canvas").classList.remove("active");
                 document.getElementById("close").classList.remove("active");
                 document.getElementById("main").classList.add("shrink");
@@ -216,10 +217,17 @@
                 document.getElementById("slider").value = 0;
                 window.scrollTo(0, 0);
             }
+            else if (levels === -1) {
+                document.getElementById("canvas").classList.add("active");
+                document.getElementById("close").classList.add("active");
+                document.getElementById("main").classList.remove("shrink");
+                drawPlainTriangle(color);
+            }
             else {
                 document.getElementById("canvas").classList.add("active");
                 document.getElementById("close").classList.add("active");
                 document.getElementById("main").classList.remove("shrink");
+                drawPlainTriangle(color);
                 let i = 0;
                 serpinskiTriangle([0, canvas.width], canvas.height, i, color);
                 interval = setInterval(() => {
@@ -236,6 +244,17 @@
                     i++;
                 }, updateMS)
             }
+        }
+
+        const drawPlainTriangle = (color) => {
+            context.beginPath()
+            context.moveTo(0, canvas.height)
+            context.lineTo(canvas.width/2, 70)
+            context.lineTo(canvas.height, canvas.width)
+            context.lineTo(0, canvas.height)
+            context.closePath()
+            context.fillStyle = color ?? 'black'
+            context.fill();
         }
 
         //iscrtaj stage(level) 3 na pocetku
