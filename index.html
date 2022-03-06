@@ -42,10 +42,6 @@
     </div>
 
     <script>
-        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-            document.getElementById('slider').value = 3;
-        }
-
         var colorBlock = document.getElementById('color-block');
         var ctx1 = colorBlock.getContext('2d');
         var width1 = colorBlock.width;
@@ -242,7 +238,14 @@
             }
         }
 
-        drawSierpinskiPeriodically(3, 250, triangleColor)
+        //iscrtaj stage(level) 3 na pocetku
+        drawSierpinskiPeriodically(2, 250, triangleColor)
+
+        
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+            document.getElementById('slider').value = 3;
+            // drawSierpinskiPeriodically(3, 250, triangleColor);
+        }
         
         //---------------------------------- KOD ZA ALGORITAM SE ZAVRSAVA OVDE ----------------------------------
 
