@@ -7,7 +7,7 @@ My team, called **Falcon**, made a web application available on this link: https
 
 Solution is built using basic web technologies **HTML**, **CSS**, **Javascript**
 
-Team **Falcon** have successfully qualified for 24 hours programming competiton. Repository of project for this competition can be found on this link: https://github.com/Banega00/Tim-Falcon-Hakaton
+Team **Falcon** have successfully qualified for this 24 hours programming competiton. Repository of project for this competition can be found on this link: https://github.com/Banega00/Tim-Falcon-Hakaton
 
 Team Falcon members: <br />
 [Branislav Stojanović](https://github.com/Banega00) <br />
