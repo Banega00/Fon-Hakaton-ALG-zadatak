@@ -1,4 +1,4 @@
-# Fon Hackaton ALG zadatak (Assignment for FON Hackaton 2022)
+# Fon Hackaton ALG zadatak (Assignment for [FON Hackaton 2022](https://hakaton.fonis.rs/2022/))
 This project is part of selection process for programming competition called FON Hackaton, held at University of Belgrade, Faculty of Organizational Sciences.
 
 Topic of this assignment is to make any kind of software that draws Sierpiński triangle.
